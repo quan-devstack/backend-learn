@@ -1,0 +1,40 @@
+<h1>User Sign In</h1>
+<form action="/auth/login" method="post">
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value="{{user.username}}"
+      />
+      {{#if inputError.username}}
+        <p id="error">{{inputError.username}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value="{{user.password}}"
+      />
+      {{#if inputError.password}}
+        <p id="error">{{inputError.password}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn green">Sign In</button>
+    </div>
+  </div>
+
+  <a href="/auth/register">Don't have an account ? Sign Up Here</a>
+</form>

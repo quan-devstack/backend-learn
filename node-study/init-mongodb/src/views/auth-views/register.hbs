@@ -1,0 +1,58 @@
+<h1>User Registration</h1>
+<form action="/auth/register" method="post" onsubmit="return checkPassword();">
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value="{{user.username}}"
+      />
+      {{#if inputError.username}}
+        <p id="error">{{inputError.username}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value="{{user.password}}"
+      />
+      {{#if inputError.password}}
+        <p id="error">{{inputError.password}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="retype">Confirm Password</label>
+      <input type="password" name="retype" id="retype" />
+      <p id="retype-error"></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s4">
+      <select class="dropdown-trigger btn" name="role">
+        <option value="0">Choose Role</option>
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn green">Register</button>
+    </div>
+  </div>
+
+  <a href="/auth/login">Already have account ? Sign In Here</a>
+</form>

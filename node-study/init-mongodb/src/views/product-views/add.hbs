@@ -1,0 +1,62 @@
+<h1>Add New Product</h1>
+<form
+  action="/product/add"
+  method="post"
+  class="col s12"
+  enctype="multipart/form-data"
+>
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="{{productValue.name}}"
+        required
+      />
+      {{#if inputError.name}}
+        <p id="error">{{inputError.name}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        name="price"
+        id="price"
+        value="{{productValue.price}}"
+        required
+      />
+      {{#if inputError.price}}
+        <p id="error">{{inputError.price}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="file" name="image" id="image" id="price" required />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s">
+      <select class="dropdown-trigger btn" name="category">
+        <option value="">Choose Category</option>
+        {{#each categoryList}}
+          <option value={{_id}}>{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn green">Add</button>
+    </div>
+  </div>
+</form>

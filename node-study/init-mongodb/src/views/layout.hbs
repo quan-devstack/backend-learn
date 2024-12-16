@@ -1,0 +1,44 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <title>Node App</title>
+    {{! materialize-css }}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    {{! public-css }}
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      {{! nav-bar }}
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">1682 Node.js</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {{#if username}}
+              <li><a href="/category">Category</a></li>
+              <li>Hello, {{username}}</li>
+              <li><a class="btn green" href="/auth/logout">Sign Out</a></li>
+            {{else}}
+              <li><a class="btn green" href="/auth/register">Sign Up</a></li>
+              <li><a class="btn green" href="/auth/login">Sign In</a></li>
+            {{/if}}
+          </ul>
+        </div>
+      </nav>
+      {{! body }}
+      {{{body}}}
+    </div>
+  </body>
+
+  {{! materialize-script }}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+  ></script>
+
+  {{! public-script }}
+  <script src="/script/materialize.js"></script>
+</html>

@@ -1,0 +1,56 @@
+<h1>Product List</h1>
+
+{{#if (eq role "admin")}}
+  <a class="btn yellow" href="/product/add">Add</a>
+{{/if}}
+<a class="btn blue" href="/product/sort/asc">Sort Up</a>
+<a class="btn blue" href="/product/sort/desc">Sort Down</a>
+
+<div class="col s12">
+  <form action="/search" method="post">
+    <input type="search" name="keyword" placeholder="Search.." />
+  </form>
+</div>
+
+{{#if message}}
+  <p>{{message}}</p>
+{{else}}
+  <table class="responsive">
+    <tr>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Product Image</th>
+      <th>Product Category</th>
+      <th>Actions</th>
+    </tr>
+    {{#each products}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>
+          <img
+            src="/image/product/{{image}}"
+            alt="img"
+            width="100"
+            height="100"
+          />
+        </td>
+        <td>{{category.name}}</td>
+        {{#if (eq @root.role "admin")}}
+          <td>
+            <a class="btn blue" href="/product/edit/{{_id}}">Edit</a>
+            <a
+              class="btn red"
+              href="/product/delete/{{_id}}"
+              onclick="return confirm('Are you sure want to delete ?')"
+            >Delete</a>
+          </td>
+        {{else}}
+          <td>
+            <a class="btn blue" href="#">Buy</a>
+          </td>
+        {{/if}}
+      </tr>
+    {{/each}}
+  </table>
+{{/if}}

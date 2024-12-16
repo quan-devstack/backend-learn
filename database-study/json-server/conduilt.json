@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "quandk",
+      "email": "quandk@example.com",
+      "password": "123456",
+      "favorites": [],
+      "followers": []
+    },
+
+    {
+      "id": 2,
+      "username": "user01",
+      "email": "user01@example.com",
+      "password": "123456",
+      "favorites": [],
+      "followers": []
+    },
+
+    {
+      "id": 3,
+      "username": "user02",
+      "email": "user02@example.com",
+      "password": "123456",
+      "favorites": [],
+      "followers": []
+    }
+  ],
+
+  "posts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "content": "This is first posts of User 01",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "2",
+      "userId": "1",
+      "content": "This is second posts of User 01",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "3",
+      "userId": "1",
+      "content": "This is third posts of User 01",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "4",
+      "userId": "2",
+      "content": "This is first posts of User 02",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "5",
+      "userId": "2",
+      "content": "This is second posts of User 02",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "6",
+      "userId": "2",
+      "content": "This is third posts of User 02",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "7",
+      "userId": "3",
+      "content": "This is first posts of User 03",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "8",
+      "userId": "3",
+      "content": "This is second posts of User 03",
+      "likes": [],
+      "comments": []
+    },
+
+    {
+      "id": "9",
+      "userId": "3",
+      "content": "This is third posts of User 03",
+      "likes": [],
+      "comments": []
+    }
+  ],
+
+  "comments": [
+    {
+      "id": "1",
+      "userId": "1",
+      "postId": "1",
+      "comments": "This is first comment of post id 1 of User 01"
+    },
+
+    {
+      "id": "2",
+      "userId": "1",
+      "postId": "1",
+      "comments": "This is second comment of post id 1 of User 01"
+    }
+  ]
+}

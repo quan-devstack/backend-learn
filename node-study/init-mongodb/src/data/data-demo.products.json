@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "669e13911a39b78be7ad6034"
+  },
+  "name": "Iphone 8",
+  "price": 300,
+  "image": "1721635729743_iphone8.jpg",
+  "category": {
+    "$oid": "667674d58f88ae2ee13a2a9b"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "669e14ca1a39b78be7ad604b"
+  },
+  "name": "Iphone 12",
+  "price": 400,
+  "image": "1721636042303_iphone12.jpg",
+  "category": {
+    "$oid": "667674d58f88ae2ee13a2a9b"
+  },
+  "__v": 0
+}]

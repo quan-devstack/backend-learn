@@ -1,0 +1,60 @@
+<h1>Edit Product</h1>
+<form action="/edit/:id" method="post" class="col s12">
+  <div class="row">
+    <div class="input-field col s12">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="{{productValue.name}}"
+        required
+      />
+      <label for="name">Name</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <input
+        type="number"
+        name="price"
+        id="price"
+        value="{{productValue.price}}"
+        required
+      />
+      <label for="price">Price</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="image">Image</label>
+      <input
+        type="url"
+        name="image"
+        id="image"
+        value="{{productValue.image}}"
+        required
+      />
+      <img src="{{productValue.image}}" alt="" width="100" height="100" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s2">
+      <select class="dropdown-trigger btn" name="category">
+        {{#each categoryList}}
+          <option value={{_id}} {{#if (eq _id ../productValue.category)}}selected{{/if}}>
+            {{name}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn green">Edit</button>
+    </div>
+  </div>
+</form>

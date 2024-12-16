@@ -1,0 +1,34 @@
+BÀI TẬP TRANING SQL 01: 
+Cho một hệ thống quản lý bán hàng orders với các bảng sau
+Customers (Khách hàng)
+- customer_id (int, primary key)
+- first_name (varchar)
+- last_name (varchar)
+- email (varchar)
+- phone (varchar)
+
+Products (Sản phẩm)
+- product_id (int, primary key)
+- product_name (varchar)
+- price (decimal)
+
+Orders (Đơn hàng)
+- order_id (int, primary key)
+- customer_id (int, foriegn key, references Customers(customer_id))
+- order_date (date)
+
+OrderItems (Chi tiết đơn hàng)
+- order_item_id (int, primary key)
+- order_id (int, foreign key, references Orders(order_id))
+- product_id (int, foreign key, references Products(product_id))
+- quantity (int)
+
+Yêu cầu bài tập: 
+1. Hiển thị danh sách tất cả các khách hàng và thông tin chi tiết của họ
+2. Truy vấn danh sách sản phẩm cùng với giá của chúng
+3. Truy vấn tất cả các đơn hàng, bao gồm mã khách hàng, tên khách hàng, ngày đặt hàng, và tổng giá trị đơn hàng (dựa trên số lượng và giá sản phẩm).
+4. Truy vấn danh sách sản phẩm bán chạy nhất, dựa trên số lượng sản phẩm được đặt hàng (tổng quantity từ OrderItems).
+5. Tìm những khách hàng không đặt bất kỳ đơn hàng nào.
+6. Tính tổng doanh thu từ tất cả các đơn hàng.
+
+Sử dụng các truy vấn SQL như SELECT, JOIN, GROUP BY, ORDER BY, và HAVING.

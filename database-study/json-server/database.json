@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "User 01",
+      "email": "user01@example.com"
+    },
+    {
+      "id": "2",
+      "name": "User 02",
+      "email": "user02@example.com"
+    },
+    {
+      "id": "3",
+      "name": "User 03",
+      "email": "user03@example.com"
+    },
+    {
+      "id": "4",
+      "name": "User 04",
+      "email": "user04@example.com"
+    },
+    {
+      "id": "6b93",
+      "name": "User 05",
+      "email": "user05@gmail.com"
+    }
+  ],
+
+  "todos": [
+    {
+      "id": "2",
+      "name": "Have Dinner",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "name": "Do Homework",
+      "completed": true
+    },
+    {
+      "id": "4",
+      "name": "Do Notion",
+      "completed": false
+    }
+  ]
+}
