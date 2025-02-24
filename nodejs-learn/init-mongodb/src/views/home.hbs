@@ -1,0 +1,11 @@
+<section class="homepage">
+  <div class="container">
+    <h1 class="title">Welcome to Home Page</h1>
+    <p class="desc">Tech Stack: Express.js, MongoDB, Handlebars</p>
+    {{#if role}}
+      <p class="desc">You are enterring as a {{role}}</p>
+    {{else}}
+      <p class="desc">Please, sign in first</p>
+    {{/if}}
+  </div>
+</section>

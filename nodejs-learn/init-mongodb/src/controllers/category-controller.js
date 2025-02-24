@@ -1,62 +1,52 @@
 const categoryModel = require("../models/category-model");
 
 const categoryController = {
-  showFormCreate: (req, res) => {
-    res.render("category-views/add");
+  readAllCategory: async (req, res) => {
+    const categories = await categoryModel.find({});
+    return res.render("category-view/index.hbs", { categories });
   },
 
-  showFormEdit: async (req, res) => {
-    let id = req.params.id;
-    let categoryValue = await categoryModel.findById(id);
-    console.log(categoryValue.description);
-    res.render("category-views/edit", { categoryValue });
+  showCreateForm: (req, res) => {
+    return res.render("category-view/create.hbs");
   },
 
   createCategory: async (req, res) => {
-    const { name, description } = req.body;
-    const category = new categoryModel({
-      name,
-      description,
-    });
+    const { name, desc } = req.body;
     try {
-      await categoryModel.create(category);
-      res.redirect("/category");
+      await categoryModel.create({
+        name,
+        desc,
+      });
+      return res.redirect("/category");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   },
 
-  readAllCategory: async (req, res) => {
-    try {
-      let categories = await categoryModel.find({});
-      res.render("category-views/index", { categories });
-    } catch (error) {
-      console.error("error: " + error);
-    }
+  showUpdateForm: async (req, res) => {
+    let categoryId = req.params.id;
+    let categoryData = await categoryModel.findById(categoryId);
+    return res.render("category-view/update.hbs", { categoryData });
   },
 
   updateCategory: async (req, res) => {
-    const id = req.params.id;
-    const { name, description } = req.body;
-    const newCategory = new categoryModel({
-      name,
-      description,
-    });
+    const categoryId = req.params.id;
+    const { name, desc } = req.body;
     try {
-      await categoryModel.findByIdAndUpdate(id, newCategory);
-      res.redirect("/category");
+      await categoryModel.findByIdAndUpdate(categoryId, { name, desc });
+      return res.redirect("/category");
     } catch (error) {
-      console.error("error: " + error);
+      console.log(error);
     }
   },
 
-  deleteSingleCategory: async (req, res) => {
-    const id = req.params.id;
+  deleteCategroy: async (req, res) => {
+    const categoryId = req.params.id;
     try {
-      await categoryModel.findByIdAndDelete(id);
-      res.redirect("/category");
+      await categoryModel.findByIdAndDelete(categoryId);
+      return res.redirect("/category");
     } catch (error) {
-      console.error("error: " + error);
+      console.log(error);
     }
   },
 };

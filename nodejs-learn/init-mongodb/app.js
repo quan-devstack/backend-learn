@@ -1,25 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const hbs = require("hbs");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const session = require("express-session");
-const hbs = require("hbs");
-const mongodb = require("./src/config/database-config");
-const indexRoutes = require("./src/routes/index-route");
-const productRoutes = require("./src/routes/product-route");
-const categoryRoutes = require("./src/routes/category-route");
-const authRoutes = require("./src/routes/auth-route");
-const {
-  checkLogin,
-  checkAdminRole,
-} = require("./src/middlewares/auth-middleware");
+const indexRoute = require("./src/routes/index-route");
+const { isEqual, calNumOrder, isSelected } = require("./src/utils/hbs");
+const { formatPrice } = require("./src/utils/format-data");
 
-// config express.js
 const app = express();
-app.use(express.json({ limit: "10mb" }));
-app.use(express.static(path.join(__dirname, "public")));
 
-// config session timeout
+// config session
 const timeout = 1000 * 60 * 60 * 24;
 app.use(
   session({
@@ -30,7 +23,7 @@ app.use(
   })
 );
 
-// config session value in template
+// config session value
 app.use((req, res, next) => {
   res.locals.username = req.session.username;
   res.locals.role = req.session.role;
@@ -38,44 +31,46 @@ app.use((req, res, next) => {
 });
 
 // config database
-mongodb();
-
-// register hbs helper
-hbs.registerHelper("eq", function (a, b) {
-  return a === b;
-});
+const DBSTRING = process.env.DBSTRING;
+const connectDB = async () => {
+  try {
+    if (!DBSTRING) {
+      throw new Error("DBSTRING is not defined. Please check your .env file.");
+    }
+    await mongoose.connect(`${DBSTRING}/demo`);
+    console.log("Database is connected");
+  } catch (error) {
+    console.error("Database connection failed:", error.message);
+  }
+};
+connectDB();
 
 // config template engine
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "hbs");
 
-//config morgan
-app.use(morgan("dev"));
+// register hbs hepers
+hbs.registerHelper("eq", isEqual);
+hbs.registerHelper("formatPrice", formatPrice);
+hbs.registerHelper("calNumOrder", calNumOrder);
+hbs.registerHelper("isSelected", isSelected);
 
-// config body-parser
+// config middlewares
+app.use(express.json({ limit: "10mb" }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// config routes
-app.use("/", indexRoutes);
-app.use("/auth", authRoutes);
-app.use("/product", checkAdminRole);
-app.use("/category", checkAdminRole);
-app.use("/product", checkLogin, productRoutes);
-app.use("/category", checkLogin, categoryRoutes);
-
-// error-handling
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use(indexRoute);
 
 // config server
-let port = 3005;
-app.listen(port, () => {
-  console.log(`server is running on: http://localhost:${port}/`);
-});
+const PORT = process.env.PORT || 4000;
+try {
+  app.listen(PORT, () => {
+    console.log(`Server is running on: http://localhost:${PORT}/`);
+  });
+} catch (error) {
+  console.error("Server failed to start:", error);
+}
 
 module.exports = app;

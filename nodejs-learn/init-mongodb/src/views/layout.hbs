@@ -1,44 +1,66 @@
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="initial-scale=1.0" />
-    <title>Node App</title>
-    {{! materialize-css }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express-Mongo</title>
+    {{! font-awesome }}
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
-    {{! public-css }}
+
+    {{! favicon }}
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
+
+    {{! css }}
     <link rel="stylesheet" href="/css/style.css" />
   </head>
+
   <body>
-    <div class="container">
-      {{! nav-bar }}
-      <nav>
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo">1682 Node.js</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <header class="header">
+      <div class="container">
+        <div class="header__layout">
+          <a href="/" class="header__title">MongoDB Demo</a>
+          {{#if (eq role "Admin")}}
             {{#if username}}
-              <li><a href="/category">Category</a></li>
-              <li>Hello, {{username}}</li>
-              <li><a class="btn green" href="/auth/logout">Sign Out</a></li>
-            {{else}}
-              <li><a class="btn green" href="/auth/register">Sign Up</a></li>
-              <li><a class="btn green" href="/auth/login">Sign In</a></li>
+              <nav class="header__nav">
+                <div class="nav__item">
+                  <a href="/product" class="nav__link">Products</a>
+                </div>
+                <div class="nav__item">
+                  <a href="/category" class="nav__link">Category</a>
+                </div>
+              </nav>
             {{/if}}
-          </ul>
+          {{/if}}
+
+          {{#if username}}
+            <div class="header__actions">
+              <p class="header__name">Hello,
+                {{username}}
+              </p>
+              <a href="/signout" class="btn btn--signout">Sign Out</a>
+            </div>
+          {{else}}
+            <div class="header__actions">
+              <a href="/signin" class="btn btn--signin">Sign In</a>
+              <a href="/signup" class="btn btn--signup">Sign Up</a>
+            </div>
+          {{/if}}
         </div>
-      </nav>
-      {{! body }}
+      </div>
+    </header>
+    <main class="main">
       {{{body}}}
-    </div>
+    </main>
+
+    <script src="/js/script.js"></script>
   </body>
 
-  {{! materialize-script }}
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-  ></script>
-
-  {{! public-script }}
-  <script src="/script/materialize.js"></script>
 </html>

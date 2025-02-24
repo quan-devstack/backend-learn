@@ -1,0 +1,55 @@
+<section class="product">
+  <div class="container">
+    <h2 class="title">List of Products</h2>
+    <div class="actions">
+      <a href="/product/create" class="btn btn--create">Create</a>
+      <a href="/product/sort/asc" class="btn btn--sort">Sort Up</a>
+      <a href="/product/sort/desc" class="btn btn--sort">Sort Down</a>
+    </div>
+    <form action="/product/search" method="POST">
+      <input
+        class="form__input"
+        type="text"
+        name="keyword"
+        placeholder="Search"
+      />
+      <button class="btn btn--search">Search</button>
+    </form>
+    <table class="table">
+      <thead>
+        <tr class="table__row">
+          <th class="table__header">No.</th>
+          <th class="table__header">Product Name</th>
+          <th class="table__header">Price</th>
+          <th class="table__header">Category</th>
+          <th class="table__header">Image</th>
+          <th class="table__header">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each products}}
+          <tr class="table__row">
+            <td class="table__data">{{calNumOrder @index 1}}</td>
+            <td class="table__data">{{name}}</td>
+            <td class="table__data">{{formatPrice price}} VNĐ</td>
+            <td class="table__data">{{category.name}}</td>
+            <td class="table__data">
+              <img src={{image}} alt="product-image" width="50" height="50" />
+            </td>
+            <td class="table__actions">
+              <a href="/product/update/{{_id}}" class="btn btn--edit">Edit</a>
+              <a
+                href="/product/delete/{{_id}}"
+                onclick="return confirm('Are you sure want to delete ?')"
+                class="btn btn--delete"
+              >
+                Delete
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

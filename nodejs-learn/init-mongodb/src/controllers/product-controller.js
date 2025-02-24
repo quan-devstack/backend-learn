@@ -1,84 +1,101 @@
 const productModel = require("../models/product-model");
 const categoryModel = require("../models/category-model");
+const { log } = require("handlebars/runtime");
 
 const productController = {
-  showFormCreate: async (req, res) => {
-    let categoryList = await categoryModel.find({});
-    res.render("product-views/add", { categoryList });
+  readAllProduct: async (req, res) => {
+    let products = await productModel.find({}).populate("category");
+    return res.render("product-view/index", { products });
   },
 
-  showFormEdit: async (req, res) => {
-    let id = req.params.id;
-    let categoryList = await categoryModel.find({});
-    let productValue = await productModel.findById(id);
-    res.render("product-views/edit", {
-      productValue,
-      categoryList,
-    });
+  showCreateForm: async (req, res) => {
+    let categories = await categoryModel.find({});
+    return res.render("product-view/create", { categories });
   },
 
   createProduct: async (req, res) => {
-    const { name, price, image, category } = req.body;
-    const product = new productModel({
-      name,
-      price,
-      image,
-      category,
-    });
-    let prefix = req.dateValue;
-    product.image = prefix + "_" + req.file.originalname;
-
+    const { name, price, category, image } = req.body;
+    let categories = await categoryModel.find({});
     try {
-      await productModel.create(product);
-      res.redirect("/");
+      await productModel.create({
+        name,
+        price,
+        category,
+        image,
+      });
+      return res.redirect("/");
     } catch (error) {
+      let errors = [];
       if (error.name === "ValidationError") {
-        let inputError = {};
         for (let field in error.errors) {
-          inputError[field] = error.errors[field].message;
+          errors[field] = error.errors[field].message;
         }
-        res.render("product-views/add", {
-          inputError,
-          product,
-        });
       }
+      console.log(errors);
+      return res.render("product-view/create", { errors, categories });
     }
   },
 
-  readAllProduct: async (req, res) => {
-    let products = await productModel.find({}).populate("category");
-    res.render("product-views/index", { products });
+  showUpdateForm: async (req, res) => {
+    let productId = req.params.id;
+    let categories = await categoryModel.find({});
+    let productData = await productModel.findById(productId);
+    return res.render("product-view/update.hbs", { productData, categories });
   },
 
   updateProduct: async (req, res) => {
-    let id = req.params.id;
-    const { name, price, image, category } = req.body;
-    const newProduct = new productModel({
-      name,
-      price,
-      image,
-      category,
-    });
+    let productId = req.params.id;
+    const { name, price, category, image } = req.body;
     try {
-      await productModel.findByIdAndUpdate(id, newProduct);
-      res.redirect("/");
+      await productModel.findByIdAndUpdate(productId, {
+        name,
+        price,
+        category,
+        image,
+      });
+      return res.redirect("/");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  deleteProduct: async (req, res) => {
+    const productId = req.params.id;
+    try {
+      await productModel.findByIdAndDelete(productId);
+      console.log("Demo Test");
+      return res.redirect("/");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  sortAscProduct: async (req, res) => {
+    try {
+      let products = await productModel
+        .find()
+        .sort({ name: 1 })
+        .populate("category");
+      res.render("product-view/index", { products });
     } catch (error) {
       console.error(error);
     }
   },
 
-  deleteSingleProduct: async (req, res) => {
-    const id = req.params.id;
+  sortDescProduct: async (req, res) => {
     try {
-      await productModel.findByIdAndDelete(id);
-      res.redirect("/");
+      let products = await productModel
+        .find()
+        .sort({ name: -1 })
+        .populate("category");
+      res.render("product-view/index", { products });
     } catch (error) {
       console.error(error);
     }
   },
 
   searchProduct: async (req, res) => {
-    let keyword = req.body.keyword;
+    const { keyword } = req.body;
     try {
       let products = await productModel
         .find({
@@ -87,36 +104,12 @@ const productController = {
         .populate("category");
 
       if (products.length === 0) {
-        return res.render("product-views/index", {
+        return res.render("product-view/index", {
           message: "Product Not Found",
         });
       } else {
-        res.render("product-views/index", { products });
+        res.render("product-view/index", { products });
       }
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
-  sortAsc: async (req, res) => {
-    try {
-      let products = await productModel
-        .find()
-        .sort({ name: 1 })
-        .populate("category");
-      res.render("product-views/index", { products });
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
-  sortDesc: async (req, res) => {
-    try {
-      let products = await productModel
-        .find()
-        .sort({ name: -1 })
-        .populate("category");
-      res.render("product-views/index", { products });
     } catch (error) {
       console.error(error);
     }

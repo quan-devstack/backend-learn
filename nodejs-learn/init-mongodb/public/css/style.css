@@ -1,7 +1,116 @@
-#error {
-  color: red;
+@import "./reset.css";
+@import "./form.css";
+
+.container {
+  margin: 0px auto;
+  max-width: 1200px;
 }
 
-#retype-error {
-  color: red;
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #cfcece;
+  text-align: center;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btn--create {
+  color: #fff;
+  background-color: green;
+}
+
+.btn--edit {
+  background-color: yellow;
+}
+
+.btn--delete {
+  background-color: red;
+}
+
+.btn--search {
+  padding: 13px;
+  border: 1px solid #000;
+}
+
+/* header */
+.header {
+  padding: 20px;
+  color: #fff;
+  background-color: #000;
+}
+
+.header__layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header__nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav__link {
+  color: #fff;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.header__name {
+  position: relative;
+}
+
+/* main */
+.main {
+  margin-top: 10px;
+}
+
+.actions {
+  margin: 15px 0;
+}
+
+.table {
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+.table__row {
+  border: 1px solid #000;
+}
+
+.table__header {
+  padding: 15px;
+  width: 270px;
+  text-align: left;
+}
+
+.table__header:nth-of-type(1) {
+  width: 70px;
+}
+
+.table__data,
+.table__actions {
+  padding: 15px;
+  text-align: left;
+}
+
+.homepage .title {
+  margin-bottom: 10px;
+}
+
+.homepage .desc {
+  margin: 10px 0;
 }

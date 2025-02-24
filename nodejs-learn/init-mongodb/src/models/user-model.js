@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    unique: true,
     required: [true, "Username is required"],
   },
 
@@ -14,9 +13,9 @@ const userSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    required: true,
+    default: "User",
   },
 });
 
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("User", userSchema);
 module.exports = userModel;

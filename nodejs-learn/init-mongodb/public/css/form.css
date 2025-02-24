@@ -1,0 +1,34 @@
+.form__title {
+  text-transform: uppercase;
+}
+
+.form__field {
+  margin: 15px 0;
+}
+
+.form__label {
+  display: block;
+}
+
+.form__input,
+.form__select {
+  margin-top: 5px;
+  padding: 13px;
+  border: 1px solid #000;
+  border-radius: 0;
+  width: 400px;
+  outline: none;
+}
+
+.form__error {
+  color: red;
+}
+
+.form__button {
+  padding: 10px;
+  border: 1px solid #000;
+  width: 400px;
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+}

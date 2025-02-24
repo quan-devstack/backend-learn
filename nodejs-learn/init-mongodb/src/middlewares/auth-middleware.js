@@ -1,17 +1,9 @@
-const checkLogin = (req, res, next) => {
-  if (req.session.username) {
-    next();
-  } else {
-    res.redirect("/auth/login");
-  }
-};
-
 const checkAdminRole = (req, res, next) => {
-  if (req.session.username && req.session.role == "admin") {
+  if (req.session.username && req.session.role == "Admin") {
     next();
   } else {
-    res.redirect("/auth/login");
+    res.redirect("/signin");
   }
 };
 
-module.exports = { checkLogin, checkAdminRole };
+module.exports = checkAdminRole;

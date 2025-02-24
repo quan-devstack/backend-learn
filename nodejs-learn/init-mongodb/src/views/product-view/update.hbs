@@ -1,0 +1,35 @@
+<form action="/product/update/{{productData._id}}" method="POST">
+  <div class="container">
+    <h2 class="form__title">Update Product</h2>
+    <div class="form__field">
+      <label for="name" class="form__label">Product Name</label>
+      <input id="name" type="text" name="name" class="form__input" value="{{productData.name}}" />
+    </div>
+
+    <div class="form__field">
+      <label for="desc" class="form__label">Product Price</label>
+      <input id="desc" type="text" name="desc" class="form__input" value="{{productData.price}}" />
+    </div>
+
+    <div class="form__field">
+      <label for="pd-category" class="form__label">Product Category</label>
+      <select name="category" id="pd-category" class="form__select">
+        {{#each categories}}
+        <option value="{{_id}}" {{#if (isSelected _id ../productData.category)}}selected{{/if}}>
+          {{name}}
+        </option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form__field">
+      <label for="pd-image" class="form__label">Product Image</label>
+      <input id="pd-image" type="text" name="image" placeholder="Product Image" class="form__input"
+        value="{{productData.image}}" />
+    </div>
+
+    <div class="form__field">
+      <button type="submit" class="form__button">Save</button>
+    </div>
+  </div>
+</form>

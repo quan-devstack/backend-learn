@@ -1,0 +1,58 @@
+<form action="/signup" method="POST" autocomplete="off">
+  <div class="container">
+    <h2 class="form__title">Sign Up</h2>
+
+    <div class="form__field">
+      <label for="name" class="form__label">Username</label>
+      <input
+        id="name"
+        type="text"
+        name="username"
+        placeholder="Enter username"
+        class="form__input"
+        value="{{formData.username}}"
+      />
+      {{#if errors.username}}
+        <p class="form__error">{{errors.username}}</p>
+      {{/if}}
+
+      {{#if errors.db_error}}
+        <p class="form__error">{{errors.db_error}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <label for="password" class="form__label">Password</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        placeholder="Enter password"
+        class="form__input"
+        value="{{formData.password}}"
+      />
+      {{#if errors.password}}
+        <p class="form__error">{{errors.password}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <label for="confirm" class="form__label">Confirm Password</label>
+      <input
+        id="confirm"
+        type="password"
+        name="confirm"
+        placeholder="Enter confirm password"
+        class="form__input"
+        value="{{formData.confirm}}"
+      />
+      {{#if errors.confirm_error}}
+        <p class="form__error">{{errors.confirm_error}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <button type="submit" class="form__button">Sign Up</button>
+    </div>
+  </div>
+</form>

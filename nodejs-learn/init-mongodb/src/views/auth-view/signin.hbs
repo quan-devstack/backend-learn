@@ -1,0 +1,44 @@
+<form action="" method="POST">
+  <div class="container">
+    <h2 class="form__title">Sign In</h2>
+    <div class="form__field">
+      <label for="name" class="form__label">Username</label>
+      <input
+        id="name"
+        type="text"
+        name="username"
+        placeholder="Enter email"
+        class="form__input"
+      />
+      {{#if errors.username}}
+        <p class="form__error">{{errors.username}}</p>
+      {{/if}}
+
+      {{#if errors.db_error}}
+        <p class="form__error">{{errors.db_error}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <label for="desc" class="form__label">Password</label>
+      <input
+        id="desc"
+        type="password"
+        name="password"
+        placeholder="Enter password"
+        class="form__input"
+      />
+      {{#if errors.password}}
+        <p class="form__error">{{errors.username}}</p>
+      {{/if}}
+
+      {{#if errors.password_error}}
+        <p class="form__error">{{errors.password_error}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <button type="submit" class="form__button">Sign In</button>
+    </div>
+  </div>
+</form>

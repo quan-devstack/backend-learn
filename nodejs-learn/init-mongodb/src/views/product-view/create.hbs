@@ -1,0 +1,59 @@
+<form action="/product/create" method="POST">
+  <div class="container">
+    <h2 class="form__title">Create new product</h2>
+    <div class="form__field">
+      <label for="pd-name" class="form__label">Product Name</label>
+      <input
+        id="pd-name"
+        type="text"
+        name="name"
+        placeholder="Product Name"
+        class="form__input"
+      />
+      {{#if errors.name}}
+        <p class="form__error">{{errors.name}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <label for="pd-price" class="form__label">Product Price</label>
+      <input
+        id="pd-price"
+        type="number"
+        name="price"
+        placeholder="Product Price"
+        class="form__input"
+      />
+      {{#if errors.price}}
+        <p class="form__error">{{errors.price}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <label for="pd-category" class="form__label">Product Category</label>
+      <select name="category" id="pd-category" class="form__select">
+        {{#each categories}}
+          <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form__field">
+      <label for="pd-image" class="form__label">Product Image</label>
+      <input
+        id="pd-image"
+        type="text"
+        name="image"
+        placeholder="Product Image"
+        class="form__input"
+      />
+      {{#if errors.image}}
+        <p class="form__error">{{errors.image}}</p>
+      {{/if}}
+    </div>
+
+    <div class="form__field">
+      <button type="submit" class="form__button">Save</button>
+    </div>
+  </div>
+</form>
